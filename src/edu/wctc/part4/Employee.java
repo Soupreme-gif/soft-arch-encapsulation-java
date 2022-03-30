@@ -116,7 +116,7 @@ public class Employee {
     // Assume this must be performed third. And assume that because department
     // policies may change that this method may need to be called
     // independently from other classes.
-    public void reviewDeptPolicies() {
+    private void reviewDeptPolicies() {
         reviewedDeptPolicies = true;
         reportService.addData(firstName + " " + lastName + " reviewed dept policies on "
                 + getFormattedDate() + NEWLINE);
@@ -125,7 +125,7 @@ public class Employee {
     // Assume this must be performed 4th. And assume that because employees
     // sometimes change office locations that this method may need to be called
     // independently from other classes.
-    public void moveIntoCubicle(String cubeId) {
+    private void moveIntoCubicle(String cubeId) {
         this.cubeId = cubeId;
         this.movedIn = true;
         reportService.addData(firstName + " " + lastName + " moved into cubicle "

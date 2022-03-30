@@ -33,15 +33,35 @@ public class Employee {
     private String cubeId;
     private LocalDate orientationDate;
 
-    public Employee(String firstName, String lastName, String ssn) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.ssn = ssn;
+    public Employee(String firstName, String lastName, String ssn)
+    {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setSsn(ssn);
     }
+
+    private void performExtraHiringSteps()
+    {
+         meetWithHrForBenefitAndSalaryInfo();
+         meetDepartmentStaff();
+         reviewDeptPolicies();
+         moveIntoCubicle(cubeId);
+    }
+
+    public void moveIntoANewCubicle(String cubeId)
+    {
+
+       String  newCubeId = cubeId;
+
+       moveIntoCubicle(newCubeId);
+
+    }
+
+
 
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.
-    public void meetWithHrForBenefitAndSalaryInfo() {
+    private void meetWithHrForBenefitAndSalaryInfo() {
         metWithHr = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
         String fmtDate = formatter.format(orientationDate);
@@ -51,7 +71,7 @@ public class Employee {
 
     // Assume this must be performed second, and assume that an employee
     // would only do this once, upon being hired.
-    public void meetDepartmentStaff() {
+    private void meetDepartmentStaff() {
         metDeptStaff = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
         String fmtDate = formatter.format(orientationDate);
@@ -62,7 +82,7 @@ public class Employee {
     // Assume this must be performed third. And assume that because department
     // policies may change that this method may need to be called 
     // independently from other classes.
-    public void reviewDeptPolicies() {
+    private void reviewDeptPolicies() {
         reviewedDeptPolicies = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
         String fmtDate = formatter.format(orientationDate);
@@ -73,7 +93,7 @@ public class Employee {
     // Assume this must be performed fourth. And assume that because employees
     // sometimes change office locations that this method may need to be called 
     // independently from other classes.
-    public void moveIntoCubicle(String cubeId) {
+    private void moveIntoCubicle(String cubeId) {
         this.cubeId = cubeId;
         this.movedIn = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
@@ -89,7 +109,11 @@ public class Employee {
     // setter methods give the developer the power to control what data is
     // allowed through validation.
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)
+    {
+        if (firstName == null || firstName.isBlank()) {
+            throw new IllegalArgumentException("first name is required");
+        }
         this.firstName = firstName;
     }
 
@@ -97,7 +121,11 @@ public class Employee {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName)
+    {
+        if (lastName == null || lastName.isBlank()) {
+            System.out.println("last name is required");
+        }
         this.lastName = lastName;
     }
 
@@ -105,7 +133,12 @@ public class Employee {
         return ssn;
     }
 
-    public void setSsn(String ssn) {
+    public void setSsn(String ssn)
+    {
+        if (ssn == null || ssn.length() < 9 || ssn.length() > 11) { // Magic numbers!
+            System.out.println("ssn is required and must be "
+                    + "between 9 and 11 characters (if hyphens are used)");
+        }
         this.ssn = ssn;
     }
 
@@ -129,7 +162,11 @@ public class Employee {
         return cubeId;
     }
 
-    public void setCubeId(String cubeId) {
+    public void setCubeId(String cubeId)
+    {
+        if (cubeId == null || cubeId.isBlank()) {
+            System.out.println("A cube id is required to be entered");
+        }
         this.cubeId = cubeId;
     }
 
