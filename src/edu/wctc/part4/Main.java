@@ -1,5 +1,7 @@
 package edu.wctc.part4;
 
+import java.util.Scanner;
+
 /**
  * This class is the startup class for the program. But together with the other
  * classes provided it is not a particularly good simulation of the real world.
@@ -11,10 +13,10 @@ package edu.wctc.part4;
 public class Main {
 
     public static void main(String[] args) {
-        Employee employee = new Employee("Peter", "Piper", "333-33-3333");
 
-        employee.doFirstTimeOrientation("A101");
-        employee.printReport();
+        Menu menu = new Menu();
+        menu.displayMenu();
+
     }
 
 }
